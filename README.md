@@ -21,3 +21,9 @@ Status: draft. Nothing here is implemented yet; the plan is below.
 
 The models are licensed by their authors (MTG, CC BY-NC-SA 4.0) and are never
 stored in this repository.
+
+## Licence
+
+The specification, code and fixtures are MIT-licensed ([LICENSE](LICENSE)). The
+models the package downloads are not covered by it: they keep their authors'
+licence (CC BY-NC-SA 4.0).
