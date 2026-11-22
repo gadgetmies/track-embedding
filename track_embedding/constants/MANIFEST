@@ -1,0 +1,9 @@
+# track-embedding/1: every file that changes the vector, pinned by sha256.
+# Columns: sha256 size-in-bytes file-name source
+# source "bundled" = this folder; otherwise the URL the file is downloaded from.
+# The models are by the Music Technology Group (MTG), Universitat Pompeu Fabra,
+# licensed CC BY-NC-SA 4.0: downloaded after the user accepts that licence,
+# never stored in this repository.
+69345a01d5ea18a9aa824245742275bc1221eecde547e05103aed854ce799b63 101240 mel_frontend.npz bundled
+65cfde30655a939de420e5c09a49a43648336fdbbf79eb3af6d3b40176339d8e 15998047 discogs_multi_embeddings-effnet-bs64-1.onnx https://essentia.upf.edu/models/feature-extractors/discogs-effnet/discogs_multi_embeddings-effnet-bs64-1.onnx
+0206e5b436bbfcf24393929e1038d516a1527222f58a2c3181b0650aaadd6036 2222 discogs_multi_embeddings-effnet-bs64-1.json https://essentia.upf.edu/models/feature-extractors/discogs-effnet/discogs_multi_embeddings-effnet-bs64-1.json

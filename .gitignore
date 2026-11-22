@@ -1,0 +1,11 @@
+.venv/
+scratch/
+__pycache__/
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+# The models are CC BY-NC-SA 4.0: never committed.
+models/
+*.onnx
+*.pb
