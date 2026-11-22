@@ -4,7 +4,7 @@ build-backend = "hatchling.build"
 
 [project]
 name = "track-embedding"
-version = "1.0.0"
+version = "1.0.1"
 description = "Reference implementation of the shared track embedding (track-embedding/1)"
 readme = "README.md"
 license = "MIT"
