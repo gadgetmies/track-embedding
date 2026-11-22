@@ -10,6 +10,12 @@ made. Running it again with another FFmpeg or numpy build may produce other
 bytes, and then the reference vectors must be made again too
 (scripts/make_reference_vectors.py).
 
+`wav-16000-mono-190-frames.wav` is not made here: it is synthetic audio (two
+sines and pink noise, made with FFmpeg) of exactly 48 384 samples, so the
+front-end gives 190 frames and a second patch would end on the last frame. Its
+reference vector came from the same Essentia pipeline. Keep its entry when
+writing fixtures.json again.
+
     python scripts/make_fixtures.py [--ffmpeg ffmpeg] [--out fixtures/track-embedding-1]
 """
 

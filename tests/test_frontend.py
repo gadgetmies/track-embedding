@@ -10,13 +10,14 @@ def test_frame_count_is_ceil_n_over_256_plus_one():
     assert [frame_count(n) for n in (0, 1, 256, 257, 512)] == [0, 2, 2, 3, 3]
 
 
-def test_patches_are_whole_128_frame_patches_every_62_frames():
-    assert [patch_count(n) for n in (0, 127, 128, 189, 190, 251, 252)] == [0, 0, 1, 1, 2, 2, 3]
+def test_patches_every_62_frames_end_before_the_last_frame():
+    # Essentia's count: a 128-frame patch that ends on the last frame is left out.
+    assert [patch_count(n) for n in (0, 127, 128, 129, 190, 191, 252, 253)] == [0, 0, 0, 1, 1, 2, 2, 3]
 
 
-def test_one_patch_needs_more_than_32256_samples():
-    assert patch_count(frame_count(32256)) == 0
-    assert patch_count(frame_count(32257)) == 1
+def test_one_patch_needs_more_than_32512_samples():
+    assert patch_count(frame_count(32512)) == 0
+    assert patch_count(frame_count(32513)) == 1
 
 
 def test_frontend_matches_a_frame_by_frame_computation():

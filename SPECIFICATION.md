@@ -1,7 +1,9 @@
 # Track embedding specification
 
-Status: **version 1 released** (`v1.0.0`), implemented by the reference package in
-this repository. Version 1 no longer changes.
+Status: **version 1 released**, implemented by the reference package in this
+repository. Version 1 is defined by the vectors fomoplayer stored; a release only
+corrects the text or the package where they disagree with those vectors
+(see "Corrections").
 
 A track embedding is one vector that describes how a piece of audio sounds. Two
 applications compute them, Harmonia (a desktop DJ library) and fomoplayer (a web
@@ -50,9 +52,12 @@ The log-mel front-end of Essentia's `TensorflowInputMusiCNN`:
 
 ### 3. Patches
 
-Patches of 128 frames with a hop of 62 frames. Only whole patches: audio with
-fewer than 128 frames has no embedding (implementations may set a higher
-minimum length; that is an application rule, not part of the vector).
+Patches of 128 frames with a hop of 62 frames, starting at frame 0. A patch is
+embedded only when it ends **before** the last frame, as Essentia counts them:
+`ceil((frames − 128) / 62)` patches. A patch that would end exactly on the last
+frame is left out, and audio of 128 frames or fewer has no embedding
+(implementations may set a higher minimum length; that is an application rule,
+not part of the vector).
 
 ### 4. Model
 
@@ -84,7 +89,8 @@ An implementation conforms to a version when, for every fixture in
 `fixtures/<version>/`, the cosine similarity between its vector and the stored
 reference vector is at least **0.99999**. Fixtures are synthetic or freely
 licensed audio only, covering: 44.1 kHz stereo MP3, 48 kHz stereo AAC (M4A),
-16 kHz mono WAV (no resampling), 22.05 kHz mono FLAC, and a file just above one
+16 kHz mono WAV (no resampling), 22.05 kHz mono FLAC, a file whose second patch
+would end on the last frame, and a file just above one
 patch long. The reference vectors are produced once by fomoplayer's Essentia
 pipeline (`audio_decode.to_wav` + `MonoLoader(sampleRate=16000,
 resampleQuality=4)` + `TensorflowPredictEffnetDiscogs`), the authority for
@@ -107,3 +113,11 @@ it can; the sender then computes a vector of one of those versions if it can.
   well enough, or whether Harmonia should embed a preview-like window for
   cross-application search. fomoplayer's research change
   `preview-vs-full-track-embeddings` measures exactly this.
+
+## Corrections
+
+- **v1.0.1** (2026-11-22): the patch count. v1.0.0 said `1 + (frames − 128) // 62`,
+  one patch more than Essentia whenever `frames − 128` is a multiple of 62 (one
+  audio length in 62); those vectors fell to cosine ≈ 0.99997 against the stored
+  ones (0.9987 on the 190-frame fixture). Found by fomoplayer's gate run on 200
+  store previews. Vectors computed with v1.0.0 should be computed again.
