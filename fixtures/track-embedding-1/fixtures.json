@@ -30,6 +30,12 @@
       "audio_sha256": "258627d677b725d685285353059473fecefb2de36f50a533e23fb05d7310c474",
       "description": "WAV 16-bit PCM, 44.1 kHz, stereo, just above one patch (one patch)",
       "reference": "wav-44100-stereo-one-patch.npy"
+    },
+    {
+      "audio": "wav-16000-mono-190-frames.wav",
+      "audio_sha256": "4b192ae5ae2d8e5c3a959cca7aaeeb5040a200278852c3b7edd6dda2ead1743a",
+      "description": "WAV 16-bit PCM, 16 kHz, mono, 190 front-end frames: its second 128-frame patch would end on the last frame and is left out (one patch)",
+      "reference": "wav-16000-mono-190-frames.npy"
     }
   ]
 }

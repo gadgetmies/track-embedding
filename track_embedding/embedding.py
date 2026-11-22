@@ -59,8 +59,10 @@ def frame_count(n_samples):
 
 
 def patch_count(n_frames):
-    """Whole patches of 128 frames every 62 (none when shorter than one)."""
-    return 0 if n_frames < PATCH_FRAMES else 1 + (n_frames - PATCH_FRAMES) // PATCH_HOP
+    """Patches of 128 frames every 62 that end before the last frame, as
+    Essentia counts them: ``ceil((n_frames - 128) / 62)``, none for 128 frames
+    or fewer."""
+    return 0 if n_frames <= PATCH_FRAMES else -(-(n_frames - PATCH_FRAMES) // PATCH_HOP)
 
 
 def patches(mel, start=0, stop=None):
@@ -99,7 +101,7 @@ class Embedder:
             raise AudioTooShortError(
                 f"audio of {len(samples)} samples ({len(samples) / SAMPLE_RATE:.3f} s at "
                 f"16 kHz) gives {len(mel)} front-end frames; one patch needs "
-                f"{PATCH_FRAMES} (more than {(PATCH_FRAMES - 2) * HOP_SIZE} samples)")
+                f"more than {PATCH_FRAMES} (more than {(PATCH_FRAMES - 1) * HOP_SIZE} samples)")
         out = np.empty((total, DIMENSIONS), np.float32)
         for start in range(0, total, BATCH):
             chunk = patches(mel, start, start + BATCH)

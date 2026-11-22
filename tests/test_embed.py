@@ -24,14 +24,14 @@ def test_vector_is_1280_float32_and_the_mean_of_the_patches(embedder, models_dir
     vector = embed(samples, models_dir)
     assert vector.shape == (1280,) and vector.dtype == np.float32
     rows = embedder.patch_embeddings(samples)
-    assert rows.shape == (patch_count(frame_count(len(samples))), 1280) == (5, 1280)
+    assert rows.shape == (patch_count(frame_count(len(samples))), 1280) == (4, 1280)
     np.testing.assert_allclose(vector, rows.mean(axis=0), rtol=0, atol=1e-6)
 
 
 def test_shorter_than_one_patch_has_no_embedding(embedder):
-    with pytest.raises(AudioTooShortError, match="one patch needs 128"):
-        embedder(_signal(32256))
-    assert embedder.patch_embeddings(_signal(32257)).shape == (1, 1280)
+    with pytest.raises(AudioTooShortError, match="one patch needs more than 128"):
+        embedder(_signal(32512))
+    assert embedder.patch_embeddings(_signal(32513)).shape == (1, 1280)
 
 
 def test_batches_of_64_with_padding_discarded(embedder):

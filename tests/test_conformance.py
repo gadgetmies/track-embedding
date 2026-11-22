@@ -17,7 +17,7 @@ TOLERANCE = 0.99999  # SPECIFICATION.md, "Conformance"
 
 def test_the_fixtures_cover_the_specifications_formats():
     assert [f["audio"].rsplit(".", 1)[1] for f in fixture_listing()] == [
-        "mp3", "m4a", "wav", "flac", "wav"]
+        "mp3", "m4a", "wav", "flac", "wav", "wav"]
 
 
 @pytest.mark.parametrize("fixture", fixture_listing(), ids=lambda f: f["audio"])
