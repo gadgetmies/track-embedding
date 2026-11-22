@@ -1,7 +1,7 @@
 # Track embedding specification
 
-Status: **draft of version 1**, implemented by the reference package in this
-repository; not released yet.
+Status: **version 1 released** (`v1.0.0`), implemented by the reference package in
+this repository. Version 1 no longer changes.
 
 A track embedding is one vector that describes how a piece of audio sounds. Two
 applications compute them, Harmonia (a desktop DJ library) and fomoplayer (a web

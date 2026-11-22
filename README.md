@@ -8,8 +8,7 @@ Version 1 (`track-embedding/1`) reproduces the vectors fomoplayer has stored
 since 2025 (Essentia `MonoLoader` + `TensorflowPredictEffnetDiscogs`) without
 Essentia or TensorFlow: FFmpeg, libsamplerate, numpy and ONNX Runtime.
 
-Status: version 1 is implemented; the first release tag, `v1.0.0`, is not made
-yet.
+Status: version 1 is released as `v1.0.0`.
 
 ## Install
 
